@@ -1,1 +1,1 @@
-# Pyret-Terminal
+# Terminal Pyhret
