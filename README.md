@@ -1,1 +1,1 @@
-# Pyret-Interpreter
+# Pyret-Terminal
