@@ -107,7 +107,7 @@ namespace TerminalPilot.Parser
                         Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName));
                     }
                     Console.WriteLine();
-                    Interpreter.interprete(_tempflag_commandwinput, instance);
+                    Interpreter.InterpreteCommand(_tempflag_commandwinput, instance);
                     _tempflag_commandwinput = "";
                     Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName));
                     _tempflag_deletelimit = Console.CursorLeft;
