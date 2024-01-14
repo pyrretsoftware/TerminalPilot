@@ -27,7 +27,7 @@ namespace TerminalPilot
             Console.WriteLine("TerminalPilot".Pastel(Color.Aqua) + ", Version " + Assembly.GetExecutingAssembly().GetName().Version);
             Console.WriteLine("From pyrret, Under MIT License.");
             Console.WriteLine();
-            Console.WriteLine("visit https://tp.axell.me/update for the latest TerminalPilot!");
+            Console.WriteLine("Link your github account at " + "https://pilot.axell.me/link".Pastel(Color.DarkViolet) + " for extra features!");
             Parser.Parser parser = new Parser.Parser();
             parser.StartParse(instance);
 

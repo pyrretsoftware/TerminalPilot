@@ -19,8 +19,16 @@ namespace TerminalPilot.Parser
         PilotedProgramCommand, //a terminalpilotcommand that adds functionality to an existing built-in command
         CouldNotDetermine //self-explanitory, often result of user error
     }
-    public class CommandInterpreter
+    public class Interpreter
     {
+        public static void CommandInterpreter(string command)
+        {
+
+        }
+        public string[] Commands = new string[]
+        {
+
+        };
         public static InputType DetermineInputType(string startcommand, TerminalInstance instance)
         {
             OSVariables os = OSVariablesMethods.GetOSVariables();
@@ -36,7 +44,8 @@ namespace TerminalPilot.Parser
                 }
             } else
             {
-                //terminalpilotcommand & 
+                //terminalpilotcommand, builtincommand
+                
             }
             return InputType.CouldNotDetermine;
         }
