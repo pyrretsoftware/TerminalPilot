@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ponte\\source\\terminalpilot\\TerminalPilot\\TerminalPilot.csproj": {}
+    "C:\\Users\\ponte\\Documents\\GitHub\\terminalpilot\\TerminalPilot\\TerminalPilot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ponte\\source\\terminalpilot\\TerminalPilot\\TerminalPilot.csproj": {
+    "C:\\Users\\ponte\\Documents\\GitHub\\terminalpilot\\TerminalPilot\\TerminalPilot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ponte\\source\\terminalpilot\\TerminalPilot\\TerminalPilot.csproj",
+        "projectUniqueName": "C:\\Users\\ponte\\Documents\\GitHub\\terminalpilot\\TerminalPilot\\TerminalPilot.csproj",
         "projectName": "TerminalPilot",
-        "projectPath": "C:\\Users\\ponte\\source\\terminalpilot\\TerminalPilot\\TerminalPilot.csproj",
+        "projectPath": "C:\\Users\\ponte\\Documents\\GitHub\\terminalpilot\\TerminalPilot\\TerminalPilot.csproj",
         "packagesPath": "C:\\Users\\ponte\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ponte\\source\\terminalpilot\\TerminalPilot\\obj\\",
+        "outputPath": "C:\\Users\\ponte\\Documents\\GitHub\\terminalpilot\\TerminalPilot\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

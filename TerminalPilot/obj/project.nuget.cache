@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4MQCUx8zYdP1L9lZN+QS8VHvkG7XIY8FEpbiu1urX+hvKDZBV6yXp58PJ6JDp77sktwzZa0jDFrnMXaDEol7tA==",
+  "dgSpecHash": "m63Lz/YdPuSgoiaOhGz96wHNc2GZ6z9o3dDBSpvy9dHsebMxqplYg1KpD40nF9qFIsjJjq118kiZbyvw8yjtXg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ponte\\source\\terminalpilot\\TerminalPilot\\TerminalPilot.csproj",
+  "projectFilePath": "C:\\Users\\ponte\\Documents\\GitHub\\terminalpilot\\TerminalPilot\\TerminalPilot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ponte\\.nuget\\packages\\pastel\\4.2.0\\pastel.4.2.0.nupkg.sha512"
   ],
