@@ -6,19 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TerminalPilot.Classes;
-
+using TerminalPilot.Enums;
 namespace TerminalPilot.Parser
 {
-    public enum InputType
-    {
-        Program, //a program, example.exe
-        File, //a file, example.txt.
-        FileCommand, //a file thats typed as a command, example parameter
-        BuiltInCommand, //a command that is built-in to terminalpilot and that all command interpreters have, mkdir.
-        TerminalPilotCommand, //a command unique to terminalpilot, pilot whatever
-        PilotedProgramCommand, //a terminalpilotcommand that adds functionality to an existing built-in command
-        CouldNotDetermine //self-explanitory, often result of user error
-    }
     public class Interpreter
     {
         public static void CommandInterpreter(string command)
@@ -77,6 +67,7 @@ namespace TerminalPilot.Parser
         }
         public static void InterpreteCommand(string command, TerminalInstance instance)
         {
+            OSVariables os = OSVariablesMethods.GetOSVariables();
             if (command != "")
             {
                 string filename = command.Split(' ')[0];
@@ -85,13 +76,25 @@ namespace TerminalPilot.Parser
                 {
                     if (inputType == InputType.Program | inputType == InputType.File)
                     {
+                        //note that the file extension is included here
                         ProcessStartInfo startinfo = new ProcessStartInfo();
                         string disposableflag_firstbestfilepath;
-                        if (File.Exists(instance.Workingdirectory + @"\" + filename));
+                        if (File.Exists(instance.Workingdirectory + @"\" + filename))
                         {
-                            disposableflag_firstbestfilepath = 
+                            disposableflag_firstbestfilepath = instance.Workingdirectory + @"\" + filename;
+                        } 
+                        else
+                        {
+                            foreach (string path in os.PathVariable)
+                            {
+                                if (File.Exists(path + @"\" + filename))
+                                {
+                                    disposableflag_firstbestfilepath = path + @"\" + filename;
+                                    break;
+                                }
+                            }
                         }
-                        setvariable:
+                        
                         startinfo.WorkingDirectory = instance.Workingdirectory.FullName;
                         startinfo.FileName = filename;
                         startinfo.UseShellExecute = false;
