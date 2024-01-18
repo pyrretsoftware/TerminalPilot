@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "m63Lz/YdPuSgoiaOhGz96wHNc2GZ6z9o3dDBSpvy9dHsebMxqplYg1KpD40nF9qFIsjJjq118kiZbyvw8yjtXg==",
+  "dgSpecHash": "Zwqfv3i0Q8KgSLz8NgjqeYELDFJMpTk/zMqp5qwXT9bdMNrvw52OKPjGl3vSuXQpFPGNSEZ0SkxtfUA6Mnh8MQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\ponte\\Documents\\GitHub\\terminalpilot\\TerminalPilot\\TerminalPilot.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ponte\\.nuget\\packages\\pastel\\4.2.0\\pastel.4.2.0.nupkg.sha512"
+    "C:\\Users\\ponte\\.nuget\\packages\\pastel\\4.2.0\\pastel.4.2.0.nupkg.sha512",
+    "C:\\Users\\ponte\\.nuget\\packages\\system.configuration.configurationmanager\\8.0.0\\system.configuration.configurationmanager.8.0.0.nupkg.sha512",
+    "C:\\Users\\ponte\\.nuget\\packages\\system.security.cryptography.protecteddata\\8.0.0\\system.security.cryptography.protecteddata.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }

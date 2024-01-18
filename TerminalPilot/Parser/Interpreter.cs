@@ -7,10 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using TerminalPilot.Classes;
 using TerminalPilot.Enums;
+using TerminalPilot.Flags;
 namespace TerminalPilot.Parser
 {
+    public class Command
+    {
+        string StartIdentifier;
+        static void CommandCode() { }
+    }
     public class Interpreter
     {
+        
         public static void CommandInterpreter(string command)
         {
 
@@ -68,17 +75,16 @@ namespace TerminalPilot.Parser
         public static void InterpreteCommand(string command, TerminalInstance instance)
         {
             OSVariables os = OSVariablesMethods.GetOSVariables();
-            if (command != "")
-            {
                 string filename = command.Split(' ')[0];
                 InputType inputType = DetermineInputType(filename, instance);
                 if (inputType != InputType.CouldNotDetermine)
                 {
                     if (inputType == InputType.Program | inputType == InputType.File)
                     {
+                        string disposableflag_firstbestfilepath = FlagHandler.GetFlagString(FlagType.DisposableFlag);
                         //note that the file extension is included here
                         ProcessStartInfo startinfo = new ProcessStartInfo();
-                        string disposableflag_firstbestfilepath;
+
                         if (File.Exists(instance.Workingdirectory + @"\" + filename))
                         {
                             disposableflag_firstbestfilepath = instance.Workingdirectory + @"\" + filename;
@@ -94,10 +100,11 @@ namespace TerminalPilot.Parser
                                 }
                             }
                         }
-                        
-                        startinfo.WorkingDirectory = instance.Workingdirectory.FullName;
-                        startinfo.FileName = filename;
-                        startinfo.UseShellExecute = false;
+
+                    Console.WriteLine("Running " + disposableflag_firstbestfilepath);
+                        startinfo.WorkingDirectory = new FileInfo(disposableflag_firstbestfilepath).Directory.FullName;
+                    startinfo.FileName = new FileInfo(disposableflag_firstbestfilepath).Name;
+                    startinfo.UseShellExecute = false;
                         if (command.Split(' ').Length > 1)
                         {
                             startinfo.Arguments = command.Split(' ')[1];
@@ -109,13 +116,12 @@ namespace TerminalPilot.Parser
                     }
                 } else
                 {
+                if (!string.IsNullOrEmpty(command))
+                {
                     Console.WriteLine("'" + filename + "' is not a valid program nor is it a valid terminalpilot command.");
                     goto done;
                 }
-                
-
-            }
-
+                }
         done:;
         }
     }
