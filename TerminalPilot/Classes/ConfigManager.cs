@@ -13,7 +13,7 @@ namespace TerminalPilot.Classes
     {
         
         //color palletes
-        public Color GetColor(ColorSchemeColors color)
+        public static Color GetColor(ColorSchemeColors color)
         {
             string configcolor = default;
             if (color == ColorSchemeColors.Standard)
@@ -37,7 +37,7 @@ namespace TerminalPilot.Classes
             }
             return Color.FromArgb(0, Int32.Parse(configcolor.Split(',')[0]), Int32.Parse(configcolor.Split(',')[1]), Int32.Parse(configcolor.Split(',')[2]));
         }
-        public void SetColor(ColorSchemeColors color, Color finalcolor)
+        public static void SetColor(ColorSchemeColors color, Color finalcolor)
         {
             string colortoset = finalcolor.R.ToString() + "," + finalcolor.G.ToString() + "," + finalcolor.B.ToString() + ",";
             if (color == ColorSchemeColors.Standard)
@@ -64,11 +64,11 @@ namespace TerminalPilot.Classes
 
         //startup
 
-        public void StartUp()
+        public static void StartUp()
         {
             SetColor(ColorSchemeColors.Standard, Color.White);
-            SetColor(ColorSchemeColors.Background, Color.Black);
-            SetColor(ColorSchemeColors.Special, Color.White);
+            SetColor(ColorSchemeColors.Special1, Color.Aqua);
+            SetColor(ColorSchemeColors.Special2, Color.Purple);
         }
     }
 }

@@ -16,11 +16,13 @@ namespace TerminalPilot
         //TerminalPilot, pyrret 2023.
         static void Main(string[] args)
         {
-            TerminalInstance instance = new TerminalInstance();
+            
 
+            TerminalInstance instance = new TerminalInstance();
             Configuration config = new Configuration();
             //parse json file
             instance.Workingdirectory = new DirectoryInfo(config.StartUpPath);
+            ConfigManager.StartUp();
             Console.Clear();
             instance.alive = true;
             instance.name = "Terminal";

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Pastel;
 using TerminalPilot.Classes;
 using TerminalPilot.Parser;
+using TerminalPilot.Enums;
 namespace TerminalPilot.Parser
 {
     internal class Parser
@@ -45,7 +46,7 @@ namespace TerminalPilot.Parser
                 Console.CursorLeft = 0;
                 Console.CursorTop = Console.WindowTop + Console.WindowHeight - 2;
                 _tempflag_messagetipline = Console.CursorTop;
-                Console.WriteLine(message.Pastel(Color.CornflowerBlue));
+                Console.WriteLine(message.Pastel(ConfigManager.GetColor(ColorSchemeColors.Special1)));
                 Console.SetCursorPosition(oldcursorleft, oldcursortop);
 
             }
@@ -78,15 +79,14 @@ namespace TerminalPilot.Parser
                         instance.Workingdirectory = new DirectoryInfo(_tempflag_pathbeforedireditor);
                         _tempflag_pathbeforedireditor = "";
                         instance.InDirectoryEditor = false;
+                        Console.Write("Exited directory editor without making any changes".Pastel(ConfigManager.GetColor(ColorSchemeColors.Special1)));
                     }
-                    Console.WriteLine("Exited directory editor without making any changes".Pastel(Color));
                     Console.WriteLine();
                     Interpreter.InterpreteCommand(_tempflag_commandwinput, instance);
                     _tempflag_commandwinput = "";
                     Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName));
                     _tempflag_deletelimit = Console.CursorLeft;
-                }
-                else if (key == '\b')
+                } else if (key == '\x1b')
                 {
                     if (Console.CursorLeft <= _tempflag_deletelimit)
                     {
@@ -107,20 +107,24 @@ namespace TerminalPilot.Parser
                         {
                             int _disposableflag_cursorpos = Console.CursorLeft;
                             instance.InDirectoryEditor = true;
-                            _tempflag_pathbeforedireditor =  instance.Workingdirectory.FullName;
+                            _tempflag_pathbeforedireditor = instance.Workingdirectory.FullName;
                             //enter dir editor
                             messagetip("You are in directory editor. to exit, press tab.");
                             RemoveConsoleLine(Console.CursorTop);
                             Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName).Replace(">", @""));
                             Console.CursorLeft = _disposableflag_cursorpos - 1;
+
                         }
                     }
-                    else
+                }
+                else if (key == '\b')
+                {
+                    if (Console.CursorLeft > _tempflag_deletelimit)
                     {
                         if (instance.InDirectoryEditor)
                         {
                             _tempflag_direditorwinput =
-                                _tempflag_direditorwinput.Remove(_tempflag_direditorwinput.Length - 1, 1);
+_tempflag_direditorwinput.Remove(_tempflag_direditorwinput.Length - 1, 1);
                         }
                         else if (_tempflag_commandwinput.Length > 0)
                         {
@@ -130,6 +134,7 @@ namespace TerminalPilot.Parser
                         Console.Write("\b \b");
                     }
                 }
+
                 else if (key == '\t')
                 {
                     if (instance.InDirectoryEditor)

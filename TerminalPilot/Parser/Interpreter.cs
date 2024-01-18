@@ -10,8 +10,14 @@ using TerminalPilot.Enums;
 using TerminalPilot.Flags;
 namespace TerminalPilot.Parser
 {
+    public class Command
+    {
+        string StartIdentifier;
+        static void CommandCode() { }
+    }
     public class Interpreter
     {
+        
         public static void CommandInterpreter(string command)
         {
 
@@ -94,10 +100,11 @@ namespace TerminalPilot.Parser
                                 }
                             }
                         }
-                        
-                        startinfo.WorkingDirectory = instance.Workingdirectory.FullName;
-                        startinfo.FileName = disposableflag_firstbestfilepath;
-                        startinfo.UseShellExecute = false;
+
+                    Console.WriteLine("Running " + disposableflag_firstbestfilepath);
+                        startinfo.WorkingDirectory = new FileInfo(disposableflag_firstbestfilepath).Directory.FullName;
+                    startinfo.FileName = new FileInfo(disposableflag_firstbestfilepath).Name;
+                    startinfo.UseShellExecute = false;
                         if (command.Split(' ').Length > 1)
                         {
                             startinfo.Arguments = command.Split(' ')[1];
