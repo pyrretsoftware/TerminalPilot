@@ -89,7 +89,7 @@ namespace TerminalPilot.Parser
                     {
                         disposableflag_firstbestfilepath = instance.Workingdirectory + @"\" + filename;
                     }
-                    else;
+                    else
                         {
                             foreach (string path in os.PathVariable)
                             {
