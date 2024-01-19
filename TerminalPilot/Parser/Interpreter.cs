@@ -85,11 +85,11 @@ namespace TerminalPilot.Parser
                         //note that the file extension is included here
                         ProcessStartInfo startinfo = new ProcessStartInfo();
 
-                        if (File.Exists(instance.Workingdirectory + @"\" + filename))
-                        {
-                            disposableflag_firstbestfilepath = instance.Workingdirectory + @"\" + filename;
-                        } 
-                        else
+                    if (File.Exists(instance.Workingdirectory + @"\" + filename))
+                    {
+                        disposableflag_firstbestfilepath = instance.Workingdirectory + @"\" + filename;
+                    }
+                    else
                         {
                             foreach (string path in os.PathVariable)
                             {
