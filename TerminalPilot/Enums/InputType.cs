@@ -9,5 +9,6 @@
         TerminalPilotCommand, //a command unique to terminalpilot, pilot whatever
         PilotedProgramCommand, //a terminalpilotcommand that adds functionality to an existing built-in command
         CouldNotDetermine //self-explanitory, often result of user error
+
     }
 }

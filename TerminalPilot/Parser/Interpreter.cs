@@ -12,25 +12,30 @@ namespace TerminalPilot.Parser
 {
     public class Command
     {
-        string StartIdentifier;
-        static void CommandCode() { }
+        public string StartIdentifier = "";
+        public string functionname = "";
     }
     public class Interpreter
     {
         
         public static void CommandInterpreter(string command)
         {
+            if (command.Split(' ')[0] == "pilot")
+            {
 
+            }
         }
+        public static Command blabvla = new Command()
+        {
+            StartIdentifier = "pilot",
+        };
+        public static Command[] TerminalPilotCommands = new Command[]
+        {
+            
+        };
         public static string[] Commands = new string[]
         {
-            "echo",
-            "cd",
-            "mkdir"
-        };
-        public static string[] TerminalPilotCommands = new string[]
-        {
-            "pilot"
+            "cd"
         };
         public static InputType DetermineInputType(string startcommand, TerminalInstance instance)
         {
@@ -47,8 +52,16 @@ namespace TerminalPilot.Parser
                 }
             } else
             {
-                //terminalpilotcommand, builtincommand
-                if (TerminalPilotCommands.Contains(startcommand))
+                foreach (char illegalcharacter in Path.GetInvalidFileNameChars())
+                {
+                    if (startcommand.Contains(illegalcharacter)) {
+                        return InputType.CouldNotDetermine;
+                    }
+
+                }
+
+                //terminalpilotcommand, builtincommand, filecommand
+                if (TerminalPilotCommands.Where(p => p.StartIdentifier == startcommand).Any())
                 {
                     return InputType.TerminalPilotCommand;
                 } else if (Commands.Contains(startcommand))
@@ -102,14 +115,17 @@ namespace TerminalPilot.Parser
                         }
 
                     Console.WriteLine("Running " + disposableflag_firstbestfilepath);
+                    if (new FileInfo(disposableflag_firstbestfilepath).Directory.FullName != null)
+                    {
                         startinfo.WorkingDirectory = new FileInfo(disposableflag_firstbestfilepath).Directory.FullName;
-                    startinfo.FileName = new FileInfo(disposableflag_firstbestfilepath).Name;
-                    startinfo.UseShellExecute = false;
+                        startinfo.FileName = new FileInfo(disposableflag_firstbestfilepath).Name;
+                        startinfo.UseShellExecute = false;
                         if (command.Split(' ').Length > 1)
                         {
                             startinfo.Arguments = command.Split(' ')[1];
                         }
                         Process.Start(startinfo);
+                    }
                     } else if (inputType == InputType.TerminalPilotCommand | inputType == InputType.BuiltInCommand)
                     {
                         CommandInterpreter(command);
