@@ -70,5 +70,19 @@ namespace TerminalPilot.Classes
             SetColor(ColorSchemeColors.Special1, Color.Aqua);
             SetColor(ColorSchemeColors.Special2, Color.Purple);
         }
+        public static void SetShell(string shell, string shellargument)
+        {
+            ConfigurationManager.AppSettings["Shell"] = shell;
+            ConfigurationManager.AppSettings["ShellArgument"] = shellargument;
+
+        }
+        public static string[] GetShell()
+        {
+            string[] shelldata = new string[1];
+            shelldata.Append(ConfigurationManager.AppSettings["Shell"]);
+            shelldata.Append(ConfigurationManager.AppSettings["ShellArgument"]);
+            return shelldata;
+
+        }
     }
 }

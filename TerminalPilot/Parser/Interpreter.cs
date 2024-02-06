@@ -8,50 +8,31 @@ using System.Threading.Tasks;
 using TerminalPilot.Classes;
 using TerminalPilot.Enums;
 using TerminalPilot.Flags;
+using TerminalPilot.Commands;
 namespace TerminalPilot.Parser
 {
     public class Command
     {
         public string StartIdentifier = "";
-        public string functionname = "";
+        public string FunctionName = "";
+        public string Tip = "";
+        public string Example = "";
     }
     public class Interpreter
     {
         
-        public static void CommandInterpreter(string command)
-        {
-            if (command.Split(' ')[0] == "pilot")
-            {
-
-            }
-        }
-        public static Command blabvla = new Command()
-        {
-            StartIdentifier = "pilot",
-        };
         public static Command[] TerminalPilotCommands = new Command[]
         {
-            
-        };
-        public static string[] Commands = new string[]
-        {
-            "cd"
+            new Command()
+            {
+                StartIdentifier = "serial",
+                FunctionName = "pilotserialcommand",
+                Tip = "Use the command '[pilot] serial [Port] [Baudrate]' to open a terminal serial connection.",
+                Example = "pilot serial COM10 9600"
+            }    
         };
         public static InputType DetermineInputType(string startcommand, TerminalInstance instance)
         {
-            OSVariables os = OSVariablesMethods.GetOSVariables();
-            if (startcommand.Contains('.'))
-            {
-                //either program or fileasprogram
-                if (os.ProgramFileTypes.Contains(startcommand.Split('.')[1]))
-                {
-                    return InputType.Program;
-                } else
-                {
-                    return InputType.File;
-                }
-            } else
-            {
                 foreach (char illegalcharacter in Path.GetInvalidFileNameChars())
                 {
                     if (startcommand.Contains(illegalcharacter)) {
@@ -61,13 +42,13 @@ namespace TerminalPilot.Parser
                 }
 
                 //terminalpilotcommand, builtincommand, filecommand
-                if (TerminalPilotCommands.Where(p => p.StartIdentifier == startcommand).Any())
+                if ("pilot" == startcommand)
                 {
                     return InputType.TerminalPilotCommand;
-                } else if (Commands.Contains(startcommand))
+                } else /*if (Commands.Contains(startcommand))*/
                 {
                     return InputType.BuiltInCommand;
-                } else 
+                }/* else 
                 {
                     foreach (string path in os.PathVariable)
                     {
@@ -80,11 +61,10 @@ namespace TerminalPilot.Parser
                     {
                         return InputType.FileCommand;
                     }
-                }
-
-            } 
+                }*/
             return InputType.CouldNotDetermine;
         }
+        
         public static void InterpreteCommand(string command, TerminalInstance instance)
         {
             OSVariables os = OSVariablesMethods.GetOSVariables();
@@ -92,44 +72,39 @@ namespace TerminalPilot.Parser
                 InputType inputType = DetermineInputType(filename, instance);
                 if (inputType != InputType.CouldNotDetermine)
                 {
-                    if (inputType == InputType.Program | inputType == InputType.File)
+                    if (inputType == InputType.TerminalPilotCommand)
                     {
-                        string disposableflag_firstbestfilepath = FlagHandler.GetFlagString(FlagType.DisposableFlag);
-                        //note that the file extension is included here
-                        ProcessStartInfo startinfo = new ProcessStartInfo();
-
-                    if (File.Exists(instance.Workingdirectory + @"\" + filename))
-                    {
-                        disposableflag_firstbestfilepath = instance.Workingdirectory + @"\" + filename;
-                    }
-                    else
+                        if (command.Split(' ')[0] == "pilot")
                         {
-                            foreach (string path in os.PathVariable)
+                            if (command == "pilot")
                             {
-                                if (File.Exists(path + @"\" + filename))
+                                PilotCommands.pilothelp();
+                                goto _temp_done;
+                            }
+                            string _tempflag_firstbestflag = String.Empty;
+                            foreach (Command icommand in TerminalPilotCommands)
+                            {
+                                if (icommand.StartIdentifier == command.Split(' ')[1])
                                 {
-                                    disposableflag_firstbestfilepath = path + @"\" + filename;
+                                    _tempflag_firstbestflag = icommand.StartIdentifier;
                                     break;
                                 }
                             }
-                        }
+                            if (_tempflag_firstbestflag == "serial")
+                            {
 
-                    Console.WriteLine("Running " + disposableflag_firstbestfilepath);
-                    if (new FileInfo(disposableflag_firstbestfilepath).Directory.FullName != null)
+                            }
+                            if (_tempflag_firstbestflag == "")
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("That pilot command does not exists. if you want information on pilot commands, visit https://rb.gy/o1k4ns.");
+                            };
+                        _temp_done:;
+                    } else
                     {
-                        startinfo.WorkingDirectory = new FileInfo(disposableflag_firstbestfilepath).Directory.FullName;
-                        startinfo.FileName = new FileInfo(disposableflag_firstbestfilepath).Name;
-                        startinfo.UseShellExecute = false;
-                        if (command.Split(' ').Length > 1)
-                        {
-                            startinfo.Arguments = command.Split(' ')[1];
-                        }
-                        Process.Start(startinfo);
+
                     }
-                    } else if (inputType == InputType.TerminalPilotCommand | inputType == InputType.BuiltInCommand)
-                    {
-                        CommandInterpreter(command);
-                    }
+                }
                 } else
                 {
                 if (!string.IsNullOrEmpty(command))

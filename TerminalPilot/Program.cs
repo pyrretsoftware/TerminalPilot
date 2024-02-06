@@ -20,7 +20,11 @@ namespace TerminalPilot
 
             TerminalInstance instance = new TerminalInstance();
             Configuration config = new Configuration();
-            //parse json file
+            OSVariables os = new OSVariables();
+            
+            //handle defualt shell
+           
+
             instance.Workingdirectory = new DirectoryInfo(config.StartUpPath);
             ConfigManager.StartUp();
             Console.Clear();
