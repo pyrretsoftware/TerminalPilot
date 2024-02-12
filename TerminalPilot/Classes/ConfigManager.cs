@@ -76,13 +76,31 @@ namespace TerminalPilot.Classes
             ConfigurationManager.AppSettings["ShellArgument"] = shellargument;
 
         }
-        public static string[] GetShell()
+        public static string GetShell()
         {
-            string[] shelldata = new string[1];
-            shelldata.Append(ConfigurationManager.AppSettings["Shell"]);
-            shelldata.Append(ConfigurationManager.AppSettings["ShellArgument"]);
-            return shelldata;
-
+            return ConfigurationManager.AppSettings["Shell"];
+        }
+        public static string GetAny(string key)
+        {
+            return ConfigurationManager.AppSettings[key];
+        }
+        public static void SetAny(string key, string value)
+        {
+            ConfigurationManager.AppSettings[key] = value;
+        }
+        public static string GetShellArgument()
+        {
+            return ConfigurationManager.AppSettings["ShellArgument"];
+        }
+        //set the user token
+        public static void SetUserToken(string usertoken)
+        {
+            ConfigurationManager.AppSettings["UserToken"] = usertoken;
+        }
+        //get the user token
+        public static string GetUserToken()
+        {
+            return ConfigurationManager.AppSettings["UserToken"];
         }
     }
 }

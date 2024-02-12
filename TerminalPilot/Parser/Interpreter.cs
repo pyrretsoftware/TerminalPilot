@@ -14,7 +14,6 @@ namespace TerminalPilot.Parser
     public class Command
     {
         public string StartIdentifier = "";
-        public string FunctionName = "";
         public string Tip = "";
         public string Example = "";
     }
@@ -26,10 +25,21 @@ namespace TerminalPilot.Parser
             new Command()
             {
                 StartIdentifier = "serial",
-                FunctionName = "pilotserialcommand",
-                Tip = "Use the command '[pilot] serial [Port] [Baudrate]' to open a terminal serial connection.",
+                Tip = "Use the command 'pilot serial [Port] [Baudrate]' to open a terminal serial connection.",
                 Example = "pilot serial COM10 9600"
-            }    
+            },
+            new Command()
+            {
+                StartIdentifier = "auth",
+                Tip = "Use the command 'pilot auth' to authenticate with your GitHub account, and get access to tons of cool features.",
+                Example = "pilot auth"
+            },
+            new Command()
+            {
+                StartIdentifier = "config",
+                Tip = "use the command 'pilot config [Mode] [Key] [Value]' to set or get a config parameter.",
+                Example = "pilot config get Shell"
+            }
         };
         public static InputType DetermineInputType(string startcommand, TerminalInstance instance)
         {
@@ -90,15 +100,21 @@ namespace TerminalPilot.Parser
                                     break;
                                 }
                             }
-                            if (_tempflag_firstbestflag == "serial")
+                            switch (_tempflag_firstbestflag)
                             {
-
+                            case "config":
+                                PilotCommands.pilotconfigcommand(command);
+                                break;
+                            case "serial":
+                                    PilotCommands.pilotserialcommand(command);
+                                    break;
+                                case "auth":
+                                    PilotCommands.pilotauthcommand(command);
+                                    break;
+                                default:
+                                    Console.WriteLine("That pilot command does not exists. if you want information on pilot commands, visit https://rb.gy/o1k4ns.");
+                                    break;
                             }
-                            if (_tempflag_firstbestflag == "")
-                            {
-                                Console.WriteLine();
-                                Console.WriteLine("That pilot command does not exists. if you want information on pilot commands, visit https://rb.gy/o1k4ns.");
-                            };
                         _temp_done:;
                     } else
                     {

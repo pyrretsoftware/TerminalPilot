@@ -33,7 +33,7 @@ namespace TerminalPilot
             Console.WriteLine("TerminalPilot".Pastel(Color.Aqua) + ", Version " + Assembly.GetExecutingAssembly().GetName().Version);
             Console.WriteLine("From pyrret, Under MIT License.");
             Console.WriteLine();
-            Console.WriteLine("Link your github account with the command " + "pilot".Pastel(Color.DarkViolet) + " link for extra features!");
+            Console.WriteLine("Current Shell: " + instance.Shell.Pastel(Color.Aqua));
             Parser.Parser parser = new Parser.Parser();
             parser.StartParse(instance);
 

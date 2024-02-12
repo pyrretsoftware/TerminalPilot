@@ -94,7 +94,7 @@ namespace TerminalPilot.Parser
 
                 }
                 else if (key == '\x1b')
-                {
+                { 
                     if (Console.CursorLeft <= _tempflag_deletelimit && Console.CursorTop == _tempflag_deletelimity)
                     {
                         //jump back to directory editor
