@@ -61,7 +61,7 @@ namespace TerminalPilot.Classes
                 Console.WriteLine("You are already authenticated!".Pastel(Color.FromArgb(255, 115, 96, 223)));
                 return;
             }
-            if (command.Split(' ').Length < 3)
+            if (command.Split(' ').Length > 2)
             {
                 if (command.Split(' ')[2] == "logout")
                 {
