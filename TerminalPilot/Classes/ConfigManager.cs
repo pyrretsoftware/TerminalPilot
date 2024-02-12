@@ -70,5 +70,37 @@ namespace TerminalPilot.Classes
             SetColor(ColorSchemeColors.Special1, Color.Aqua);
             SetColor(ColorSchemeColors.Special2, Color.Purple);
         }
+        public static void SetShell(string shell, string shellargument)
+        {
+            ConfigurationManager.AppSettings["Shell"] = shell;
+            ConfigurationManager.AppSettings["ShellArgument"] = shellargument;
+
+        }
+        public static string GetShell()
+        {
+            return ConfigurationManager.AppSettings["Shell"];
+        }
+        public static string GetAny(string key)
+        {
+            return ConfigurationManager.AppSettings[key];
+        }
+        public static void SetAny(string key, string value)
+        {
+            ConfigurationManager.AppSettings[key] = value;
+        }
+        public static string GetShellArgument()
+        {
+            return ConfigurationManager.AppSettings["ShellArgument"];
+        }
+        //set the user token
+        public static void SetUserToken(string usertoken)
+        {
+            ConfigurationManager.AppSettings["UserToken"] = usertoken;
+        }
+        //get the user token
+        public static string GetUserToken()
+        {
+            return ConfigurationManager.AppSettings["UserToken"];
+        }
     }
 }

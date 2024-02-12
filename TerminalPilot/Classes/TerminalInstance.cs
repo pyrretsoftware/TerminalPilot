@@ -14,5 +14,7 @@ namespace TerminalPilot.Classes
         public string name { get; set; }
         public DirectoryInfo Workingdirectory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
         public bool InDirectoryEditor = false;
+        public string Shell = ConfigManager.GetShell();
+        public string ShellCommandArgument = ConfigManager.GetShellArgument();
     }
 }
