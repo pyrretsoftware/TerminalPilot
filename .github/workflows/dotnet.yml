@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     defaults:
       run:
         working-directory: ./TerminalPilot
@@ -27,3 +27,11 @@ jobs:
       run: dotnet build TerminalPilot.sln
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Publish
+      run: dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained false
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: TerminalPilot
+        path: |
+          .\bin\Debug\net6.0\win-x64\publish\*
