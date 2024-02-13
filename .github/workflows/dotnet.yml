@@ -34,4 +34,4 @@ jobs:
       with:
         name: TerminalPilot
         path: |
-          .\bin\Debug\net6.0\win-x64\publish\*
+          .\TerminalPilot\bin\Debug\net6.0\win-x64\publish*
