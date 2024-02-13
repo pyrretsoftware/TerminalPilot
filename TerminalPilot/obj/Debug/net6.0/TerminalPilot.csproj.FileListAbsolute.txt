@@ -19,7 +19,6 @@ C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\bin\Debug\net6.0\Ter
 C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\bin\Debug\net6.0\TerminalPilot.deps.json
 C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\bin\Debug\net6.0\TerminalPilot.runtimeconfig.json
 C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\bin\Debug\net6.0\TerminalPilot.dll
-C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\bin\Debug\net6.0\ref\TerminalPilot.dll
 C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\bin\Debug\net6.0\TerminalPilot.pdb
 C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\bin\Debug\net6.0\Pastel.dll
 C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\obj\Debug\net6.0\TerminalPilot.csproj.AssemblyReference.cache
@@ -35,3 +34,5 @@ C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\obj\Debug\net6.0\Ter
 C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\bin\Debug\net6.0\TerminalPilot.dll.config
 C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
 C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\obj\Debug\net6.0\TerminalPilot.sourcelink.json
+C:\Users\ponte\Documents\GitHub\terminalpilot\TerminalPilot\obj\Debug\net6.0\refint\TerminalPilot.dll
