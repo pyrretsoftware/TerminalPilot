@@ -26,7 +26,7 @@ jobs:
     - name: Publish (Linux Arm64)
       run: dotnet publish --runtime linux-arm64
     - name: Publish (Linux x64)
-      run: dotnet publish --runtime linux-amd64
+      run: dotnet publish --runtime linux-x64
     - name: Publish (Windows x64)
       run: dotnet publish --runtime win-x64
     - name: Publish (macOS)
@@ -54,4 +54,4 @@ jobs:
       with:
         name: TerminalPilot - MacOS
         path: |
-          .\bin\Debug\net6.0\linux-x64\publish*
+          .\bin\Debug\net6.0\osx-x64\publish*
