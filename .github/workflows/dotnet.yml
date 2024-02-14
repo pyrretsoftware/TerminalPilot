@@ -23,8 +23,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
     - name: Publish (Linux Arm64)
       run: dotnet publish --runtime linux-arm64
     - name: Publish (Linux x64)
@@ -38,22 +36,22 @@ jobs:
       with:
         name: TerminalPilot - Windows
         path: |
-          .\TerminalPilot\bin\Debug\net6.0\win-x64\publish*
+          .\bin\Debug\net6.0\win-x64\publish*
     - name: Upload Artifact (Linux Arm64)
       uses: actions/upload-artifact@v4
       with:
         name: TerminalPilot - Linux Arm64
         path: |
-          .\TerminalPilot\bin\Debug\net6.0\linux-arm64\publish*
+          .\bin\Debug\net6.0\linux-arm64\publish*
     - name: Upload Artifact (Linux x64)
       uses: actions/upload-artifact@v4
       with:
         name: TerminalPilot - Linux x64
         path: |
-          .\TerminalPilot\bin\Debug\net6.0\linux-x64\publish*
+          .\bin\Debug\net6.0\linux-x64\publish*
     - name: Upload Artifact (MacOS)
       uses: actions/upload-artifact@v4
       with:
         name: TerminalPilot - MacOS
         path: |
-          .\TerminalPilot\bin\Debug\net6.0\linux-x64\publish*
+          .\bin\Debug\net6.0\linux-x64\publish*
