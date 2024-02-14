@@ -5,7 +5,7 @@ Because were still in beta, its only officially supported on windows (but linux 
 ## Installing
 Warning: Terminalpilot is currently in beta, so there will be bugs.
 
-Download a build artifact from the actions tab. if your on linux, you can run the install script:
+Download a build artifact from the actions tab. if your on ubuntu/debian, you can run the install script:
 ```
 curl -fsSL https://axell.me/install.sh | sh
 ```
