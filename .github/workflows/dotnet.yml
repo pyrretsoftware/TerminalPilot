@@ -36,19 +36,19 @@ jobs:
       with:
         name: TerminalPilot - Windows
         path: |
-          .\bin\Debug\net6.0\win-x64\publish*
+          ./TerminalPilot/bin/Debug/net6.0/win-x64/publish*
     - name: Upload Artifact (Linux Arm64)
       uses: actions/upload-artifact@v4
       with:
         name: TerminalPilot - Linux Arm64
         path: |
-          .\bin\Debug\net6.0\linux-arm64\publish*
+          ./TerminalPilot/bin/Debug/net6.0/linux-arm64/publish*
     - name: Upload Artifact (Linux x64)
       uses: actions/upload-artifact@v4
       with:
         name: TerminalPilot - Linux x64
         path: |
-          .\bin\Debug\net6.0\linux-x64\publish*
+          ./bin/Debug/net6.0/linux-x64/publish*
     - name: Upload Artifact (MacOS)
       uses: actions/upload-artifact@v4
       with:
