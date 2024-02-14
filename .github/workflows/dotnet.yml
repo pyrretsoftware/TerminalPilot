@@ -8,6 +8,8 @@ name: .NET
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - TerminalPilot/**
   pull_request:
     branches: [ "main" ]
 
@@ -55,14 +57,5 @@ jobs:
         name: TerminalPilot - MacOS
         path: |
           .\bin\Debug\net6.0\osx-x64\publish*
-    - name: release
-      uses: actions/create-release@v1
-      id: create_release
-      with:
-        draft: false
-        prerelease: true
-        release_name: ${{ steps.version.outputs.version }}
-        tag_name: ${{ github.ref }}
-        body_path: auto-changelog.md
       env:
         GITHUB_TOKEN: ${{ github.token }}
