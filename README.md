@@ -1,7 +1,7 @@
 # TerminalPilot
 A feature-rich terminal with a bunch of extra features
 ## Platform support
-Because were still in beta, its only available on windows. We are working to try to get it onto linux and macos soon.
+Because were still in beta, its only officially supported on windows (but linux does work!). We are working to try to get it onto linux and macos soon.
 ## Installing
 Warning: Terminalpilot is currently in beta, so there will be bugs.
 
