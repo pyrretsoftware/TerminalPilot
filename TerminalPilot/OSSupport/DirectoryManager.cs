@@ -30,5 +30,17 @@ namespace TerminalPilot.OSSupport
                 return '\b';
             }
         }
-    }
+
+        public static string GetOsBackSpaceString()
+        {
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                return "/";
+            }
+            else
+            {
+                return @"\";
+            }
+        }
+    } 
 }

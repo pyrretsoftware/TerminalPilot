@@ -107,7 +107,7 @@ namespace TerminalPilot.Parser
 
                                 instance.Workingdirectory = instance.Workingdirectory.Parent;
                                 RemoveConsoleLine(Console.CursorTop);
-                                Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName).Replace(">", @"\"));
+                                Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName).Replace(">", OsDirectoryManager.GetOsBackSpaceChar()));
                                 _tempflag_deletelimit = Console.CursorLeft;
                                 _tempflag_deletelimity = Console.CursorTop;
 
