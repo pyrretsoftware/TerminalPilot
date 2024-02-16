@@ -33,6 +33,13 @@ namespace TerminalPilot.Parser
         }
         public void StartParse(TerminalInstance instance)
         {
+            Console.CancelKeyPress += (sender, e) => {
+                e.Cancel = true; // prevent the process from terminating.
+
+            };
+
+
+
             int _tempflag_messagetipline =
               default;
             void messagetip(string message)
@@ -107,7 +114,7 @@ namespace TerminalPilot.Parser
 
                                 instance.Workingdirectory = instance.Workingdirectory.Parent;
                                 RemoveConsoleLine(Console.CursorTop);
-                                Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName).Replace(">", OsDirectoryManager.GetOsBackSpaceChar()));
+                                Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName).Replace(">", OsDirectoryManager.GetOsBackSpaceString()));
                                 _tempflag_deletelimit = Console.CursorLeft;
                                 _tempflag_deletelimity = Console.CursorTop;
 

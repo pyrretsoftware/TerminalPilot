@@ -118,6 +118,11 @@ namespace TerminalPilot.Parser
                         _temp_done:;
                     } else
                     {
+                        //run the command in the specifed shell
+                        string shell = ConfigManager.GetShell();
+                        string arguments = ConfigManager.GetShellArgument();
+                        //start the shell process
+                        ProcessStartInfo startInfo = new ProcessStartInfo(shell, arguments.Replace("{COMMAND}", command));
 
                     }
                 }
