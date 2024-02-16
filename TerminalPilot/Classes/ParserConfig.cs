@@ -9,6 +9,6 @@ namespace TerminalPilot.Classes
 {
     public class ParserConfig
     {
-        public string linefeed = "{PATH}" + ">".Pastel(Color.FromArgb(51, 255, 82));
+        public string linefeed = "{USERPATH}{AFTERUSERPATH}" + ">".Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Large));
     }
 }

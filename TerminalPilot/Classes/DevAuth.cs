@@ -58,7 +58,7 @@ namespace TerminalPilot.Classes
         {
             if (ConfigManager.GetUserToken() != String.Empty)
             {
-                Console.WriteLine("You are already authenticated!".Pastel(Color.FromArgb(255, 115, 96, 223)));
+                Console.WriteLine("You are already authenticated!".Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Small1)));
                 return;
             }
             if (command.Split(' ').Length > 2)
@@ -66,7 +66,7 @@ namespace TerminalPilot.Classes
                 if (command.Split(' ')[2] == "logout")
                 {
                     ConfigManager.SetUserToken(null);
-                    Console.WriteLine("You have been logged out.".Pastel(Color.FromArgb(255, 115, 96, 223)));
+                    Console.WriteLine("You have been logged out.".Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Small1)));
                     return;
                 }
             }
@@ -81,12 +81,12 @@ namespace TerminalPilot.Classes
             };
             System.Diagnostics.Process.Start(psi);
             Console.WriteLine();
-            Console.WriteLine("Head over to your browser window and complete the authentication.".Pastel(Color.FromArgb(255, 115, 96, 223)));
+            Console.WriteLine("Head over to your browser window and complete the authentication.".Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Large)));
             var usertokenpromise = GetUserTokenLoop(exchangeToken);
             usertokenpromise.Wait();
             var usertoken = usertokenpromise.Result.UserToken;
             Console.WriteLine();
-            Console.WriteLine("Authentication complete!".Pastel(Color.FromArgb(255, 115, 96, 223)));
+            Console.WriteLine("Authentication complete!".Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Large)));
             //save the user token with the config manager
             ConfigManager.SetUserToken(usertoken);
         }
