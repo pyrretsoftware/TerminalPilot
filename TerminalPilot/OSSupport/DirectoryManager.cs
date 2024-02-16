@@ -23,7 +23,7 @@ namespace TerminalPilot.OSSupport
         {
             if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
-                return '␈';
+                return '?';
             }
             else
             {
