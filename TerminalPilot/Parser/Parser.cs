@@ -92,12 +92,8 @@ namespace TerminalPilot.Parser
             _tempflag_deletelimity = Console.CursorTop;
             while (instance.alive == true)
             {
-<<<<<<< Updated upstream
-                char key = Console.ReadKey(true).KeyChar;
-=======
                 ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(true);
                 char key = consoleKeyInfo.KeyChar;
->>>>>>> Stashed changes
                 if (key == '\r')
                 {
                     _tempflag_linecursorleft = "";
@@ -156,11 +152,7 @@ namespace TerminalPilot.Parser
                         }
                     }
                 }
-<<<<<<< Updated upstream
-                else if (key == OsDirectoryManager.GetOsBackSpaceChar())
-=======
-                else if (key == '\b')
->>>>>>> Stashed changes
+                else if (consoleKeyInfo.Key == ConsoleKey.Backspace)
                 {
                     if (Console.CursorLeft > _tempflag_deletelimit | _tempflag_deletelimity != Console.CursorTop)
                     {
