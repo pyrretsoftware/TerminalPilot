@@ -29,7 +29,16 @@ namespace TerminalPilot.Parser
         {
             ParserConfig config = new ParserConfig();
             Console.WriteLine();
-            Console.Write(config.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName));
+            string AfterUserPath = instance.Workingdirectory.FullName.Replace(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "");
+            string UserPathAndBefore = instance.Workingdirectory.FullName.Replace(AfterUserPath, "");
+            Console.Write(config.linefeed.Replace("{PATH}", UserPathAndBefore.Pastel(Palletes.GetCurrentPallete(PalleteType.Small1))) + AfterUserPath.Pastel(Palletes.GetCurrentPallete(PalleteType.Large)));
+        }
+        public static string GetNewLine(TerminalInstance instance)
+        {
+            ParserConfig config = new ParserConfig();
+            string AfterUserPath = instance.Workingdirectory.FullName.Replace(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "");
+            string UserPathAndBefore = instance.Workingdirectory.FullName.Replace(AfterUserPath, "");
+            return config.linefeed.Replace("{USERPATH}", UserPathAndBefore.Pastel(Palletes.GetCurrentPallete(PalleteType.Large))).Replace("{AFTERUSERPATH}", AfterUserPath.Pastel(Palletes.GetCurrentPallete(PalleteType.Small1)));
         }
         public void StartParse(TerminalInstance instance)
         {
@@ -76,7 +85,9 @@ namespace TerminalPilot.Parser
             string _tempflag_pathbeforedireditor = "";
             string _tempflag_linecursorleft = "";
             Console.WriteLine();
-            Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName));
+            string AfterUserPath = instance.Workingdirectory.FullName.Replace(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "");
+            string UserPathAndBefore = instance.Workingdirectory.FullName.Replace(AfterUserPath, "");
+            Console.Write(GetNewLine(instance));
             _tempflag_deletelimit = Console.CursorLeft;
             _tempflag_deletelimity = Console.CursorTop;
             while (instance.alive == true)
@@ -99,7 +110,7 @@ namespace TerminalPilot.Parser
                     Console.WriteLine();
                     Interpreter.InterpreteCommand(_tempflag_commandwinput, instance);
                     _tempflag_commandwinput = "";
-                    Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName));
+                    Console.Write(GetNewLine(instance));
                     _tempflag_deletelimit = Console.CursorLeft;
                     _tempflag_deletelimity = Console.CursorTop;
 
@@ -117,7 +128,10 @@ namespace TerminalPilot.Parser
 
                                 instance.Workingdirectory = instance.Workingdirectory.Parent;
                                 RemoveConsoleLine(Console.CursorTop);
-                                Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName).Replace(">", OsDirectoryManager.GetOsBackSpaceString()));
+                                Console.WriteLine();
+                                 AfterUserPath = instance.Workingdirectory.FullName.Replace(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "");
+                                 UserPathAndBefore = instance.Workingdirectory.FullName.Replace(AfterUserPath, "");
+                                Console.Write(GetNewLine(instance).Replace(">", OsDirectoryManager.GetOsBackSpaceString()));
                                 _tempflag_deletelimit = Console.CursorLeft;
                                 _tempflag_deletelimity = Console.CursorTop;
 
@@ -131,7 +145,7 @@ namespace TerminalPilot.Parser
                             //enter dir editor
                             messagetip("You are in directory editor. to exit, press tab.");
                             RemoveConsoleLine(Console.CursorTop);
-                            Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName).Replace(">", @""));
+                            Console.Write(GetNewLine(instance).Replace(">", @""));
                             Console.CursorLeft = _disposableflag_cursorpos - 1;
 
                         }
@@ -204,7 +218,7 @@ _tempflag_direditorwinput.Remove(_tempflag_direditorwinput.Length - 1, 1);
                                 {
                                     _grammarflag_plural = " directories";
                                 }
-                                Console.WriteLine("Successfully created " + _disposableflag_dirscreated.ToString().Pastel(Color.Aqua) + _grammarflag_plural);
+                                Console.WriteLine("Successfully created " + _disposableflag_dirscreated.ToString().Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Small1)) + _grammarflag_plural);
                                 instance.Workingdirectory = dirinf;
                             }
                         }
@@ -212,7 +226,7 @@ _tempflag_direditorwinput.Remove(_tempflag_direditorwinput.Length - 1, 1);
                         {
                             instance.Workingdirectory = dirinf;
                         }
-                        Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName));
+                        Console.Write(GetNewLine(instance));
                         _tempflag_deletelimit = Console.CursorLeft;
                     }
                     else

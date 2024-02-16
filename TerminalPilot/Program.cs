@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Pastel;
 using TerminalPilot.Classes;
+using TerminalPilot.OSSupport;
 namespace TerminalPilot
 {
     internal class Program
@@ -22,18 +23,24 @@ namespace TerminalPilot
             Configuration config = new Configuration();
             OSVariables os = new OSVariables();
             
+            if (ConfigManager.GetShell() == "")
+            {
+                AutomaticConfigConfigurer.StartupConfigure();
+                instance.Shell = ConfigManager.GetShell();
+                instance.ShellCommandArgument = ConfigManager.GetShellArgument();
+            }
             //handle defualt shell
-           
+
 
             instance.Workingdirectory = new DirectoryInfo(config.StartUpPath);
             ConfigManager.StartUp();
             Console.Clear();
             instance.alive = true;
             instance.name = "Terminal";
-            Console.WriteLine("TerminalPilot".Pastel(Color.Aqua) + ", Version " + Assembly.GetExecutingAssembly().GetName().Version);
+            Console.WriteLine("TerminalPilot".Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Large)) + ", Version " + Assembly.GetExecutingAssembly().GetName().Version);
             Console.WriteLine("From pyrret, Under MIT License.");
             Console.WriteLine();
-            Console.WriteLine("Current Shell: " + instance.Shell.Pastel(Color.Aqua));
+            Console.WriteLine("Current Shell: " + instance.Shell.Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Small1)) + ". You can change it with " +  "'pilot shell'".Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Small1)));
             Parser.Parser parser = new Parser.Parser();
             parser.StartParse(instance);
 

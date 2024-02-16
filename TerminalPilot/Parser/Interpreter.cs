@@ -19,24 +19,23 @@ namespace TerminalPilot.Parser
     }
     public class Interpreter
     {
-
         public static Command[] TerminalPilotCommands = new Command[] {
-      new Command() {
-          StartIdentifier = "serial",
-            Tip = "Use the command 'pilot serial [Port] [Baudrate]' to open a terminal serial connection.",
-            Example = "pilot serial COM10 9600"
-        },
-        new Command() {
-          StartIdentifier = "auth",
-            Tip = "Use the command 'pilot auth' to authenticate with your GitHub account, and get access to tons of cool features.",
-            Example = "pilot auth"
-        },
-        new Command() {
-          StartIdentifier = "config",
-            Tip = "use the command 'pilot config [Mode] [Key] [Value]' to set or get a config parameter.",
-            Example = "pilot config get Shell"
-        }
-    };
+          new Command() {
+              StartIdentifier = "serial",
+                Tip = "Use the command 'pilot serial [Port] [Baudrate]' to open a terminal serial connection.",
+                Example = "pilot serial COM10 9600"
+            },
+            new Command() {
+              StartIdentifier = "auth",
+                Tip = "Use the command 'pilot auth' to authenticate with your GitHub account, and get access to tons of cool features.",
+                Example = "pilot auth"
+            },
+            new Command() {
+              StartIdentifier = "config",
+                Tip = "use the command 'pilot config [Mode] [Key] [Value]' to set or get a config parameter.",
+                Example = "pilot config get Shell"
+            }
+        };
         public static InputType DetermineInputType(string startcommand, TerminalInstance instance)
         {
             if ("pilot" == startcommand.Split(' ')[0])
