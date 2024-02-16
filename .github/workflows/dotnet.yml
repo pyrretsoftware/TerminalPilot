@@ -56,6 +56,6 @@ jobs:
       with:
         name: TerminalPilot - MacOS
         path: |
-          .\bin\Debug\net6.0\osx-x64\publish*
+          ./bin/Debug/net6.0/osx-x64/publish*
       env:
         GITHUB_TOKEN: ${{ github.token }}
