@@ -10,6 +10,7 @@ using Pastel;
 using TerminalPilot.Classes;
 using TerminalPilot.Parser;
 using TerminalPilot.Enums;
+using TerminalPilot.OSSupport;
 namespace TerminalPilot.Parser
 {
     internal class Parser
@@ -32,6 +33,13 @@ namespace TerminalPilot.Parser
         }
         public void StartParse(TerminalInstance instance)
         {
+            Console.CancelKeyPress += (sender, e) => {
+                e.Cancel = true; // prevent the process from terminating.
+
+            };
+
+
+
             int _tempflag_messagetipline =
               default;
             void messagetip(string message)
@@ -106,7 +114,7 @@ namespace TerminalPilot.Parser
 
                                 instance.Workingdirectory = instance.Workingdirectory.Parent;
                                 RemoveConsoleLine(Console.CursorTop);
-                                Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName).Replace(">", @"\"));
+                                Console.Write(parseconfig.linefeed.Replace("{PATH}", instance.Workingdirectory.FullName).Replace(">", OsDirectoryManager.GetOsBackSpaceString()));
                                 _tempflag_deletelimit = Console.CursorLeft;
                                 _tempflag_deletelimity = Console.CursorTop;
 
@@ -126,7 +134,7 @@ namespace TerminalPilot.Parser
                         }
                     }
                 }
-                else if (key == '\b')
+                else if (key == OsDirectoryManager.GetOsBackSpaceChar())
                 {
                     if (Console.CursorLeft > _tempflag_deletelimit | _tempflag_deletelimity != Console.CursorTop)
                     {
@@ -164,7 +172,7 @@ _tempflag_direditorwinput.Remove(_tempflag_direditorwinput.Length - 1, 1);
                         instance.InDirectoryEditor = false;
                         RemoveConsoleLine(_tempflag_messagetipline);
                         RemoveConsoleLine(Console.CursorTop);
-                        DirectoryInfo dirinf = new DirectoryInfo(instance.Workingdirectory.FullName + @"\" + _tempflag_direditorwinput);
+                        DirectoryInfo dirinf = new DirectoryInfo(instance.Workingdirectory.FullName + OsDirectoryManager.GetOsSlash() + _tempflag_direditorwinput);
                         _tempflag_direditorwinput = "";
                         if (!Directory.Exists(dirinf.FullName))
                         {
