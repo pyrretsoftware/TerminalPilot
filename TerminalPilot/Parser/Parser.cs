@@ -35,7 +35,10 @@ namespace TerminalPilot.Parser
         {
             Console.CancelKeyPress += (sender, e) => {
                 e.Cancel = true; // prevent the process from terminating.
-
+                if (Interpreter.RunningProcess != null)
+                {
+                    //Interpreter.RunningProcess.Kill();
+                }
             };
 
 
