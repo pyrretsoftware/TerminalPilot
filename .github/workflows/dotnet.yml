@@ -10,6 +10,7 @@ on:
     branches: [ "main" ]
     paths:
       - TerminalPilot/**
+      - .github/**    
   pull_request:
     branches: [ "main" ]
 
@@ -50,12 +51,12 @@ jobs:
       with:
         name: TerminalPilot - Linux x64
         path: |
-          ./bin/Debug/net6.0/linux-x64/publish*
+          ./TerminalPilot/bin/Debug/net6.0/linux-x64/publish*
     - name: Upload Artifact (MacOS)
       uses: actions/upload-artifact@v4
       with:
         name: TerminalPilot - MacOS
         path: |
-          ./bin/Debug/net6.0/osx-x64/publish*
+          ./TerminalPilot/bin/Debug/net6.0/osx-x64/publish*
       env:
         GITHUB_TOKEN: ${{ github.token }}
