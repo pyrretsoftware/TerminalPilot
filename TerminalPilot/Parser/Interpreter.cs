@@ -75,7 +75,7 @@ namespace TerminalPilot.Parser
             return InputType.CouldNotDetermine;
         }
         
-        public static void InterpreteCommand(string command, TerminalInstance instance)
+        public static async Task<bool> InterpreteCommand(string command, TerminalInstance instance)
         {
             OSVariables os = OSVariablesMethods.GetOSVariables();
                 string filename = command.Split(' ')[0];
@@ -123,7 +123,7 @@ namespace TerminalPilot.Parser
                         string arguments = ConfigManager.GetShellArgument();
                         //start the shell process
                         ProcessStartInfo startInfo = new ProcessStartInfo(shell, arguments.Replace("{COMMAND}", command));
-
+                        
                     }
                 }
                 } else
@@ -135,6 +135,7 @@ namespace TerminalPilot.Parser
                 }
                 }
         done:;
+    return true;
         }
     }
 }
