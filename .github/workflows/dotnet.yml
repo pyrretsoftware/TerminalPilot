@@ -37,26 +37,35 @@ jobs:
     - name: Upload Artifact (Windows x64)
       uses: actions/upload-artifact@v4
       with:
-        name: TerminalPilot - Windows
+        name: TerminalPilotWindows
         path: |
           ./TerminalPilot/bin/Debug/net6.0/win-x64/publish*
     - name: Upload Artifact (Linux Arm64)
       uses: actions/upload-artifact@v4
       with:
-        name: TerminalPilot - Linux Arm64
+        name: TerminalPilotLinuxArm64
         path: |
           ./TerminalPilot/bin/Debug/net6.0/linux-arm64/publish*
     - name: Upload Artifact (Linux x64)
       uses: actions/upload-artifact@v4
       with:
-        name: TerminalPilot - Linux x64
+        name: TerminalPilotLinuxx64
         path: |
           ./TerminalPilot/bin/Debug/net6.0/linux-x64/publish*
     - name: Upload Artifact (MacOS)
       uses: actions/upload-artifact@v4
       with:
-        name: TerminalPilot - MacOS
+        name: TerminalPilotMacOS
         path: |
           ./TerminalPilot/bin/Debug/net6.0/osx-x64/publish*
+    - name: Create Release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: true
+        release_name: ${{ steps.version.outputs.version }}
+        tag_name: ${{ github.ref }}
+        body_path: auto-changelog.md
       env:
-        GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
