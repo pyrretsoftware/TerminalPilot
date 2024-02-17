@@ -19,11 +19,13 @@ namespace TerminalPilot.Classes
             public Color SmallColor3 { get; set; }
         }
 
-        public static string CurrentPallete = "NeonPurple";
-
         public static Color GetCurrentPallete(PalleteType type)
         {
-            PalleteClass currentpallete = IncludedPalletes[CurrentPallete];
+            if (ConfigManager.GetAny("Theme") == "")
+            {
+                ConfigManager.SetAny("Theme", "NeonPurple");
+            }
+            PalleteClass currentpallete = IncludedPalletes[ConfigManager.GetAny("Theme")];
             if (type == PalleteType.Large)
             {
                 return currentpallete.LargeColor;
@@ -44,7 +46,7 @@ namespace TerminalPilot.Classes
         }
         public static void SetCurrentPallete(string pallete)
         {
-            CurrentPallete = pallete;
+            ConfigManager.SetAny("Theme", pallete);
         }
         public static Dictionary<string, PalleteClass> IncludedPalletes = new Dictionary<string, PalleteClass>()
         {

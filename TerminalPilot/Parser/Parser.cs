@@ -97,36 +97,86 @@ namespace TerminalPilot.Parser
 
             void ReRenderUserInputLine()
             {
-                //clear current line
-                Console.SetCursorPosition(_tempflag_deletelimit, Console.CursorTop);
-                Console.Write(new string(' ', Console.WindowWidth - _tempflag_deletelimit));
-                Console.SetCursorPosition(_tempflag_deletelimit, Console.CursorTop);
+                // Calculate the number of lines
+                int inputStartPos = _tempflag_deletelimit;
+                int firstLineWidth = Console.WindowWidth - inputStartPos;
+                int remainingLinesWidth = _tempflag_commandwinput.Length - firstLineWidth;
+                int numberOfLines = 1 + (remainingLinesWidth > 0 ? (remainingLinesWidth / Console.WindowWidth) + ((remainingLinesWidth % Console.WindowWidth == 0) ? 0 : 1) : 0);
+
+                // Store the original cursor position
+                int originalCursorTop = Console.CursorTop;
+                int originalCursorLeft = Console.CursorLeft;
+
+                // Clear each line
+                for (int i = 0; i < numberOfLines; i++)
+                {
+                    int currentLineStartPos = (i == 0) ? inputStartPos : 0;
+                    Console.SetCursorPosition(currentLineStartPos, originalCursorTop - i);
+                    Console.Write(new string(' ', Console.WindowWidth - currentLineStartPos));
+                }
+
+                // Reset the cursor position
+                Console.SetCursorPosition(originalCursorLeft, originalCursorTop - numberOfLines + 1);
+
+                // Write the new input
                 Console.Write(_tempflag_commandwinput);
             }
+            int GetCommandWInputPos()
+            {
+                int consoleWidth = Console.WindowWidth;
 
+                int position = (Console.CursorTop - _tempflag_deletelimity) * consoleWidth + (Console.CursorLeft - _tempflag_deletelimit);
+
+                if (position > _tempflag_commandwinput.Length)
+                {
+                    position = _tempflag_commandwinput.Length;
+                }
+                return position;
+            }
             void InsertIntoUserInput(string insertstring)
             {
-                _tempflag_commandwinput = _tempflag_commandwinput.Insert(Console.CursorLeft - _tempflag_deletelimit, insertstring);
+                //also support overflows
+                if (Console.CursorLeft == Console.WindowWidth - 1)
+                {
+                    Console.CursorLeft = 0;
+                    Console.CursorTop++;
+                }
+                _tempflag_commandwinput = _tempflag_commandwinput.Insert(GetCommandWInputPos(), insertstring);
                 ReRenderUserInputLine();
+                Console.SetCursorPosition(Console.CursorLeft + insertstring.Length, Console.CursorTop);
             }
+
+
             void RemoveFromUserInput()
             {
-                _tempflag_commandwinput = _tempflag_commandwinput.Remove(Console.CursorLeft -1 - _tempflag_deletelimit);
-                ReRenderUserInputLine();
+                int position = GetCommandWInputPos();
+                if (position > 0)
+                {
+                    _tempflag_commandwinput = _tempflag_commandwinput.Remove(position - 1, 1);
+                    ReRenderUserInputLine();
+
+                    // Adjust the cursor position
+                    if (Console.CursorLeft > 0)
+                    {
+                        Console.CursorLeft--;
+                    }
+                    else if (Console.CursorTop > _tempflag_deletelimity)
+                    {
+                        Console.CursorLeft = Console.WindowWidth - 1;
+                        Console.CursorTop--;
+                    }
+                }
             }
+            _tempflag_deletelimity = Console.CursorTop;
 
             while (instance.alive == true)
             {
-                char key = Console.ReadKey(true).KeyChar;
                 ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(true);
-<<<<<<< Updated upstream
-=======
                 char key = consoleKeyInfo.KeyChar;
                 //preserve the current cursor position
                 _tempflag_cursorpos = Console.CursorLeft;
 
                 #region HandleSpecialCharacters
->>>>>>> Stashed changes
                 if (key == '\r')
                 {
                     _tempflag_linecursorleft = "";
@@ -263,14 +313,16 @@ _tempflag_direditorwinput.Remove(_tempflag_direditorwinput.Length - 1, 1);
                     {
                         Console.Write(key);
                     }
-                } else if (consoleKeyInfo.Key == ConsoleKey.LeftArrow)
+                }
+                else if (consoleKeyInfo.Key == ConsoleKey.LeftArrow)
                 {
                     if (Console.CursorLeft > _tempflag_deletelimit)
                     {
                         Console.CursorLeft--;
                         _tempflag_cursorpos = Console.CursorLeft;
                     }
-                } else if (consoleKeyInfo.Key == ConsoleKey.RightArrow)
+                }
+                else if (consoleKeyInfo.Key == ConsoleKey.RightArrow)
                 {
                     if (Console.CursorLeft < _tempflag_commandwinput.Length + _tempflag_deletelimit)
                     {
@@ -284,21 +336,30 @@ _tempflag_direditorwinput.Remove(_tempflag_direditorwinput.Length - 1, 1);
 
 
 
-                        if (instance.InDirectoryEditor)
+                    if (instance.InDirectoryEditor)
+                    {
+                        _tempflag_direditorwinput = _tempflag_direditorwinput + key;
+                    }
+                    else
+                    {
+                        InsertIntoUserInput(key.ToString());
+                        if (_tempflag_deletelimity != Console.CursorTop && _tempflag_linecursorleft == "")
                         {
-                            _tempflag_direditorwinput = _tempflag_direditorwinput + key;
+                            _tempflag_linecursorleft = _tempflag_commandwinput;
                         }
-                        else
-                        {
-                            InsertIntoUserInput(key.ToString());
-                            if (_tempflag_deletelimity != Console.CursorTop && _tempflag_linecursorleft == "")
-                            {
-                                _tempflag_linecursorleft = _tempflag_commandwinput;
-                            }
-                        }
-                        Console.CursorLeft = _tempflag_cursorpos + 1;
+                    }
+                    //overflow if there is no room left
+                    if (Console.CursorLeft == Console.WindowWidth - 1)
+                    {
+                        Console.CursorLeft = 0;
+                        Console.CursorTop++;
+                    } else
+                    {
+                    Console.CursorLeft = _tempflag_cursorpos + 1;
 
-                    
+                    }
+
+
                 }
             }
         }
