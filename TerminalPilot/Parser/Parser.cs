@@ -117,16 +117,12 @@ namespace TerminalPilot.Parser
 
             while (instance.alive == true)
             {
-                char key = Console.ReadKey(true).KeyChar;
                 ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(true);
-<<<<<<< Updated upstream
-=======
                 char key = consoleKeyInfo.KeyChar;
                 //preserve the current cursor position
                 _tempflag_cursorpos = Console.CursorLeft;
 
                 #region HandleSpecialCharacters
->>>>>>> Stashed changes
                 if (key == '\r')
                 {
                     _tempflag_linecursorleft = "";
