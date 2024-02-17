@@ -80,20 +80,53 @@ namespace TerminalPilot.Parser
             int _tempflag_gobackwriteline = default;
             int _tempflag_deletelimit = 0;
             int _tempflag_deletelimity = 0;
+            int _tempflag_cursorpos = 0;
             string _tempflag_direditorwinput = "";
             string _tempflag_commandwinput = "";
             string _tempflag_pathbeforedireditor = "";
             string _tempflag_linecursorleft = "";
+
+            string WrittenUserInputLine = "";
+
             Console.WriteLine();
             string AfterUserPath = instance.Workingdirectory.FullName.Replace(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "");
             string UserPathAndBefore = instance.Workingdirectory.FullName.Replace(AfterUserPath, "");
             Console.Write(GetNewLine(instance));
             _tempflag_deletelimit = Console.CursorLeft;
             _tempflag_deletelimity = Console.CursorTop;
+
+            void ReRenderUserInputLine()
+            {
+                //clear current line
+                Console.SetCursorPosition(_tempflag_deletelimit, Console.CursorTop);
+                Console.Write(new string(' ', Console.WindowWidth - _tempflag_deletelimit));
+                Console.SetCursorPosition(_tempflag_deletelimit, Console.CursorTop);
+                Console.Write(_tempflag_commandwinput);
+            }
+
+            void InsertIntoUserInput(string insertstring)
+            {
+                _tempflag_commandwinput = _tempflag_commandwinput.Insert(Console.CursorLeft - _tempflag_deletelimit, insertstring);
+                ReRenderUserInputLine();
+            }
+            void RemoveFromUserInput()
+            {
+                _tempflag_commandwinput = _tempflag_commandwinput.Remove(Console.CursorLeft -1 - _tempflag_deletelimit);
+                ReRenderUserInputLine();
+            }
+
             while (instance.alive == true)
             {
                 char key = Console.ReadKey(true).KeyChar;
                 ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(true);
+<<<<<<< Updated upstream
+=======
+                char key = consoleKeyInfo.KeyChar;
+                //preserve the current cursor position
+                _tempflag_cursorpos = Console.CursorLeft;
+
+                #region HandleSpecialCharacters
+>>>>>>> Stashed changes
                 if (key == '\r')
                 {
                     _tempflag_linecursorleft = "";
@@ -111,13 +144,14 @@ namespace TerminalPilot.Parser
                     Console.WriteLine();
                     Interpreter.InterpreteCommand(_tempflag_commandwinput, instance);
                     _tempflag_commandwinput = "";
+                    WrittenUserInputLine = "";
                     Console.Write(GetNewLine(instance));
                     _tempflag_deletelimit = Console.CursorLeft;
                     _tempflag_deletelimity = Console.CursorTop;
 
                 }
                 else if (key == '\x1b')
-                { 
+                {
                     if (Console.CursorLeft <= _tempflag_deletelimit && Console.CursorTop == _tempflag_deletelimity)
                     {
                         //jump back to directory editor
@@ -130,8 +164,8 @@ namespace TerminalPilot.Parser
                                 instance.Workingdirectory = instance.Workingdirectory.Parent;
                                 RemoveConsoleLine(Console.CursorTop);
                                 Console.WriteLine();
-                                 AfterUserPath = instance.Workingdirectory.FullName.Replace(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "");
-                                 UserPathAndBefore = instance.Workingdirectory.FullName.Replace(AfterUserPath, "");
+                                AfterUserPath = instance.Workingdirectory.FullName.Replace(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "");
+                                UserPathAndBefore = instance.Workingdirectory.FullName.Replace(AfterUserPath, "");
                                 Console.Write(GetNewLine(instance).Replace(">", OsDirectoryManager.GetOsBackSpaceString()));
                                 _tempflag_deletelimit = Console.CursorLeft;
                                 _tempflag_deletelimity = Console.CursorTop;
@@ -163,8 +197,7 @@ _tempflag_direditorwinput.Remove(_tempflag_direditorwinput.Length - 1, 1);
                         }
                         else if (_tempflag_commandwinput.Length > 0)
                         {
-                            _tempflag_commandwinput =
-                                _tempflag_commandwinput.Remove(_tempflag_commandwinput.Length - 1, 1);
+                            RemoveFromUserInput();
                         }
                         if (Console.CursorLeft == 0)
                         {
@@ -173,10 +206,6 @@ _tempflag_direditorwinput.Remove(_tempflag_direditorwinput.Length - 1, 1);
 
                             _tempflag_deletelimity = Console.CursorTop;
                             //Console.SetCursorPosition(Console.CursorTop - 1, _tempflag_deletelimit);
-                        }
-                        else
-                        {
-                            Console.Write("\b \b");
                         }
                     }
 
@@ -234,31 +263,42 @@ _tempflag_direditorwinput.Remove(_tempflag_direditorwinput.Length - 1, 1);
                     {
                         Console.Write(key);
                     }
+                } else if (consoleKeyInfo.Key == ConsoleKey.LeftArrow)
+                {
+                    if (Console.CursorLeft > _tempflag_deletelimit)
+                    {
+                        Console.CursorLeft--;
+                        _tempflag_cursorpos = Console.CursorLeft;
+                    }
+                } else if (consoleKeyInfo.Key == ConsoleKey.RightArrow)
+                {
+                    if (Console.CursorLeft < _tempflag_commandwinput.Length + _tempflag_deletelimit)
+                    {
+                        Console.CursorLeft++;
+                        _tempflag_cursorpos = Console.CursorLeft;
+                    }
                 }
                 else
+                #endregion
                 {
-                    string towrite;
-                    if (keydict.TryGetValue(key, out towrite))
-                    {
-                        Console.Write(towrite);
-                    }
-                    else
-                    {
+
+
+
                         if (instance.InDirectoryEditor)
                         {
                             _tempflag_direditorwinput = _tempflag_direditorwinput + key;
                         }
                         else
                         {
-                            _tempflag_commandwinput = _tempflag_commandwinput + key;
+                            InsertIntoUserInput(key.ToString());
                             if (_tempflag_deletelimity != Console.CursorTop && _tempflag_linecursorleft == "")
                             {
                                 _tempflag_linecursorleft = _tempflag_commandwinput;
                             }
                         }
-                        Console.Write(key);
+                        Console.CursorLeft = _tempflag_cursorpos + 1;
 
-                    }
+                    
                 }
             }
         }
