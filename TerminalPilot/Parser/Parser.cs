@@ -168,16 +168,20 @@ _tempflag_direditorwinput.Remove(_tempflag_direditorwinput.Length - 1, 1);
                         }
                         if (Console.CursorLeft == 0)
                         {
-                            Console.CursorLeft = _tempflag_commandwinput.Length + _tempflag_deletelimit;
-                            Console.CursorTop--;
+
+                            Console.CursorLeft = Console.WindowWidth - 1;
+                            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
 
                             _tempflag_deletelimity = Console.CursorTop;
                             //Console.SetCursorPosition(Console.CursorTop - 1, _tempflag_deletelimit);
+                            Console.Write(" ");
+
                         }
                         else
                         {
                             Console.Write("\b \b");
                         }
+                        
                     }
 
 
