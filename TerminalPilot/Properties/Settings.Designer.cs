@@ -50,12 +50,12 @@ namespace TerminalPilot.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ShellArguments {
+        public string ShellArgument {
             get {
-                return ((string)(this["ShellArguments"]));
+                return ((string)(this["ShellArgument"]));
             }
             set {
-                this["ShellArguments"] = value;
+                this["ShellArgument"] = value;
             }
         }
         
