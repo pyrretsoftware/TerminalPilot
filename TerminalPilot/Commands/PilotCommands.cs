@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using TerminalPilot.Classes;
 using TerminalPilot.OSSupport;
 using TerminalPilot.Enums;
+using static System.Net.Mime.MediaTypeNames;
+using System.Diagnostics;
 namespace TerminalPilot.Commands
 {
     public class PilotCommands
@@ -53,9 +55,36 @@ namespace TerminalPilot.Commands
             }
             
         }
-        public static void pilotreloadcommand(string command, TerminalInstance instance)
+
+        public static void pilotthemecommand()
         {
-            
+            int OptionCount = 1;
+            Console.WriteLine("");
+            Console.WriteLine("Available themes:".Pastel(Palletes.GetCurrentPallete(PalleteType.Small1)));
+            foreach (string theme in Palletes.IncludedPalletes.Keys)
+            {
+                string finished = OptionCount + ". " + theme;
+                Console.WriteLine(finished.Pastel(Palletes.IncludedPalletes[theme].LargeColor));
+                OptionCount++;
+            }
+            Console.WriteLine("Please select a theme by typing its number:".Pastel(Palletes.GetCurrentPallete(PalleteType.Small1)));
+            string selectedtheme = Console.ReadLine();
+            if (int.TryParse(selectedtheme, out int result))
+            {
+                if (result > 0 && result < OptionCount)
+                {
+                    Palletes.SetCurrentPallete(Palletes.IncludedPalletes.Keys.ToArray()[result - 1]);
+                    Console.WriteLine("Set theme to " + Palletes.IncludedPalletes.Keys.ToArray()[result - 1]);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid selection.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection.");
+            }
         }
         public static void pilotconfigcommand(string config)
         {
