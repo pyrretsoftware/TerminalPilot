@@ -32,8 +32,23 @@ namespace TerminalPilot.Parser
             },
             new Command() {
               StartIdentifier = "config",
-                Tip = "use the command 'pilot config [Mode] [Key] [Value]' to set or get a config parameter.",
+                Tip = "Use the command 'pilot config [Mode] [Key] [Value]' to set or get a config parameter.",
                 Example = "pilot config get Shell"
+            },
+            new Command() {
+              StartIdentifier = "shell",
+                Tip = "Use the command 'pilot shell' to change which shell you are currently using.",
+                Example = "pilot shell"
+            },
+            new Command() {
+              StartIdentifier = "reload",
+                Tip = "Use the command 'pilot reload' to reload terminalpilot.",
+                Example = "pilot reload"
+            },
+            new Command() {
+              StartIdentifier = "exit",
+                Tip = "Use the command 'pilot exit' to exit TerminalPilot.",
+                Example = "pilot exit"
             }
         };
         public static InputType DetermineInputType(string startcommand, TerminalInstance instance)
@@ -81,6 +96,12 @@ namespace TerminalPilot.Parser
                             break;
                         case "auth":
                             PilotCommands.pilotauthcommand(command);
+                            break;
+                        case "shell":
+                            PilotCommands.pilotshellcommand(command);
+                            break;
+                        case "reload":
+                            PilotCommands.pilotreloadcommand(command, instance);
                             break;
                         default:
                             Console.WriteLine("That pilot command does not exists. if you want information on pilot commands, visit https://rb.gy/o1k4ns.");
