@@ -13,63 +13,10 @@ namespace TerminalPilot.Classes
     {
         
         //color palletes
-        public static Color GetColor(ColorSchemeColors color)
-        {
-            string configcolor = default;
-            if (color == ColorSchemeColors.Standard)
-            {
-                configcolor = (string?)Properties.Settings.Default["StandardTextColor"];
-            } else if (color == ColorSchemeColors.Background)
-            {
-                configcolor = (string?)Properties.Settings.Default["BackgroundColor"];
-            }
-            else if (color == ColorSchemeColors.Special1)
-            {
-                configcolor = (string?)Properties.Settings.Default["SpecialColor1"];
-            }
-            else if (color == ColorSchemeColors.Special2)
-            {
-                configcolor = (string?)Properties.Settings.Default["SpecialColor2"];
-            }
-            else if (color == ColorSchemeColors.Special3)
-            {
-                configcolor = (string?)Properties.Settings.Default["SpecialColor3"];
-            }
-            return Color.FromArgb(0, Int32.Parse(configcolor.Split(',')[0]), Int32.Parse(configcolor.Split(',')[1]), Int32.Parse(configcolor.Split(',')[2]));
-        }
-        public static void SetColor(ColorSchemeColors color, Color finalcolor)
-        {
-            string colortoset = finalcolor.R.ToString() + "," + finalcolor.G.ToString() + "," + finalcolor.B.ToString() + ",";
-            if (color == ColorSchemeColors.Standard)
-            {
-                Properties.Settings.Default["StandardTextColor"] = colortoset;
-            }
-            else if (color == ColorSchemeColors.Background)
-            {
-                Properties.Settings.Default["BackgroundColor"] = colortoset;
-            }
-            else if (color == ColorSchemeColors.Special1)
-            {
-                Properties.Settings.Default["SpecialColor1"] = colortoset;
-            }
-            else if (color == ColorSchemeColors.Special2)
-            {
-               Properties.Settings.Default["SpecialColor2"] = colortoset;
-            }
-            else if (color == ColorSchemeColors.Special3)
-            {
-                Properties.Settings.Default["SpecialColor3"] = colortoset;
-            }
-        }
+ 
 
         //startup
 
-        public static void StartUp()
-        {
-            SetColor(ColorSchemeColors.Standard, Color.White);
-            SetColor(ColorSchemeColors.Special1, Color.Aqua);
-            SetColor(ColorSchemeColors.Special2, Color.Purple);
-        }
         public static void SetShell(string shell, string shellargument)
         {
             Properties.Settings.Default["Shell"] = shell;
