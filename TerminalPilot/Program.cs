@@ -33,7 +33,6 @@ namespace TerminalPilot
 
 
             instance.Workingdirectory = new DirectoryInfo(config.StartUpPath);
-            ConfigManager.StartUp();
             Console.Clear();
             instance.alive = true;
             instance.name = "Terminal";
