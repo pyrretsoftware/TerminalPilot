@@ -97,26 +97,10 @@ namespace TerminalPilot.Parser
 
             void ReRenderUserInputLine()
             {
-                // Calculate the number of lines
-                int inputStartPos = _tempflag_deletelimit;
-                int firstLineWidth = Console.WindowWidth - inputStartPos;
-                int remainingLinesWidth = _tempflag_commandwinput.Length - firstLineWidth;
-                int numberOfLines = 1 + (remainingLinesWidth > 0 ? (remainingLinesWidth / Console.WindowWidth) + ((remainingLinesWidth % Console.WindowWidth == 0) ? 0 : 1) : 0);
+                Console.SetCursorPosition(_tempflag_deletelimit, Console.CursorTop); // Set the cursor at the start of the line
+                Console.Write(new string(' ', Console.WindowWidth)); // Write spaces to overwrite the line
+                Console.SetCursorPosition(_tempflag_deletelimit, Console.CursorTop - 1); // Reset the cursor to the start of the line
 
-                // Store the original cursor position
-                int originalCursorTop = Console.CursorTop;
-                int originalCursorLeft = Console.CursorLeft;
-
-                // Clear each line
-                for (int i = 0; i < numberOfLines; i++)
-                {
-                    int currentLineStartPos = (i == 0) ? inputStartPos : 0;
-                    Console.SetCursorPosition(currentLineStartPos, originalCursorTop - i);
-                    Console.Write(new string(' ', Console.WindowWidth - currentLineStartPos));
-                }
-
-                // Reset the cursor position
-                Console.SetCursorPosition(originalCursorLeft, originalCursorTop - numberOfLines + 1);
 
                 // Write the new input
                 Console.Write(_tempflag_commandwinput);
@@ -158,7 +142,7 @@ namespace TerminalPilot.Parser
                     // Adjust the cursor position
                     if (Console.CursorLeft > 0)
                     {
-                        Console.CursorLeft--;
+                        //Console.CursorLeft--;
                     }
                     else if (Console.CursorTop > _tempflag_deletelimity)
                     {
