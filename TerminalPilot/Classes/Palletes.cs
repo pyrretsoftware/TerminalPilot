@@ -19,11 +19,14 @@ namespace TerminalPilot.Classes
             public Color SmallColor3 { get; set; }
         }
 
-        public static string CurrentPallete = "NeonPurple";
 
         public static Color GetCurrentPallete(PalleteType type)
         {
-            PalleteClass currentpallete = IncludedPalletes[CurrentPallete];
+            if (ConfigManager.GetAny("Theme") == "")
+            {
+                ConfigManager.SetAny("Theme", "Neon Purple (Defualt)");
+            }
+            PalleteClass currentpallete = IncludedPalletes[ConfigManager.GetAny("Theme")];
             if (type == PalleteType.Large)
             {
                 return currentpallete.LargeColor;
@@ -44,12 +47,12 @@ namespace TerminalPilot.Classes
         }
         public static void SetCurrentPallete(string pallete)
         {
-            CurrentPallete = pallete;
+            ConfigManager.SetAny("Theme", pallete);
         }
         public static Dictionary<string, PalleteClass> IncludedPalletes = new Dictionary<string, PalleteClass>()
         {
             //neon purple (defualt and my favorite)
-            {"NeonPurple", new PalleteClass()
+            {"Neon Purple (Defualt)", new PalleteClass()
             {
                 LargeColor = Color.FromArgb(0, 101, 40, 247),
                 SmallColor1 = Color.FromArgb(0, 160, 118, 249),
@@ -57,14 +60,20 @@ namespace TerminalPilot.Classes
                 SmallColor3 = Color.FromArgb(0, 237, 228, 255),
             }},
             // sunset pastel
-            {"SunsetPastel", new PalleteClass()
+            {"Sunset Pastel", new PalleteClass()
             {
-                LargeColor = Color.FromArgb(0, 101, 40, 247),
-                SmallColor1 = Color.FromArgb(0, 160, 118, 249),
-                SmallColor2 = Color.FromArgb(0, 215, 187, 245),
-                SmallColor3 = Color.FromArgb(0, 237, 228, 255),
-            }
-        }
-    };
-}
+                LargeColor = Color.FromArgb(0, 228, 147, 179),
+                SmallColor1 = Color.FromArgb(0, 183, 132, 183),
+                SmallColor2 = Color.FromArgb(0, 142, 122, 181),
+                SmallColor3 = Color.FromArgb(0, 238, 165, 166)
+            } },
+            {"Ocean Blue", new PalleteClass()
+            {
+                LargeColor = Color.FromArgb(0, 182, 255, 250),
+                SmallColor1 = Color.FromArgb(0, 128, 179, 255), 
+                SmallColor2 = Color.FromArgb(0, 152, 228, 255), 
+                SmallColor3 = Color.FromArgb(0, 104, 126, 255),
+            }}
+        };
+    }
 }
