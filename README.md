@@ -1,5 +1,5 @@
 # TerminalPilot
-A feature-rich terminal with a bunch of extra features
+An open source feature-rich terminal
 ## Platform support
 Because were still in beta, its only officially supported on windows (but linux does work!). We are working to try to get it onto linux and macos soon.
 ## Installing
