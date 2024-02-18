@@ -66,7 +66,7 @@ namespace TerminalPilot.Parser
                 Console.CursorLeft = 0;
                 Console.CursorTop = Console.WindowTop + Console.WindowHeight - 2;
                 _tempflag_messagetipline = Console.CursorTop;
-                Console.WriteLine(message.Pastel(ConfigManager.GetColor(ColorSchemeColors.Special1)));
+                Console.WriteLine(message.Pastel(Palletes.GetCurrentPallete(PalleteType.Small1)));
                 Console.SetCursorPosition(oldcursorleft, oldcursortop);
 
             }
@@ -106,7 +106,7 @@ namespace TerminalPilot.Parser
                         instance.Workingdirectory = new DirectoryInfo(_tempflag_pathbeforedireditor);
                         _tempflag_pathbeforedireditor = "";
                         instance.InDirectoryEditor = false;
-                        Console.Write("Exited directory editor without making any changes".Pastel(ConfigManager.GetColor(ColorSchemeColors.Special1)));
+                        Console.Write("Exited directory editor without making any changes".Pastel(Palletes.GetCurrentPallete(PalleteType.Large)));
                     }
                     Console.WriteLine();
                     Interpreter.InterpreteCommand(_tempflag_commandwinput, instance);
