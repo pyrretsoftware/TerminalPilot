@@ -18,22 +18,22 @@ namespace TerminalPilot.Classes
             string configcolor = default;
             if (color == ColorSchemeColors.Standard)
             {
-                configcolor = ConfigurationManager.AppSettings["StandardTextColor"];
+                configcolor = (string?)Properties.Settings.Default["StandardTextColor"];
             } else if (color == ColorSchemeColors.Background)
             {
-                configcolor = ConfigurationManager.AppSettings["BackgroundColor"];
+                configcolor = (string?)Properties.Settings.Default["BackgroundColor"];
             }
             else if (color == ColorSchemeColors.Special1)
             {
-                configcolor = ConfigurationManager.AppSettings["SpecialColor1"];
+                configcolor = (string?)Properties.Settings.Default["SpecialColor1"];
             }
             else if (color == ColorSchemeColors.Special2)
             {
-                configcolor = ConfigurationManager.AppSettings["SpecialColor2"];
+                configcolor = (string?)Properties.Settings.Default["SpecialColor2"];
             }
             else if (color == ColorSchemeColors.Special3)
             {
-                configcolor = ConfigurationManager.AppSettings["SpecialColor3"];
+                configcolor = (string?)Properties.Settings.Default["SpecialColor3"];
             }
             return Color.FromArgb(0, Int32.Parse(configcolor.Split(',')[0]), Int32.Parse(configcolor.Split(',')[1]), Int32.Parse(configcolor.Split(',')[2]));
         }
@@ -42,23 +42,23 @@ namespace TerminalPilot.Classes
             string colortoset = finalcolor.R.ToString() + "," + finalcolor.G.ToString() + "," + finalcolor.B.ToString() + ",";
             if (color == ColorSchemeColors.Standard)
             {
-                ConfigurationManager.AppSettings["StandardTextColor"] = colortoset;
+                Properties.Settings.Default["StandardTextColor"] = colortoset;
             }
             else if (color == ColorSchemeColors.Background)
             {
-                ConfigurationManager.AppSettings["BackgroundColor"] = colortoset;
+                Properties.Settings.Default["BackgroundColor"] = colortoset;
             }
             else if (color == ColorSchemeColors.Special1)
             {
-                ConfigurationManager.AppSettings["SpecialColor1"] = colortoset;
+                Properties.Settings.Default["SpecialColor1"] = colortoset;
             }
             else if (color == ColorSchemeColors.Special2)
             {
-               ConfigurationManager.AppSettings["SpecialColor2"] = colortoset;
+               Properties.Settings.Default["SpecialColor2"] = colortoset;
             }
             else if (color == ColorSchemeColors.Special3)
             {
-                ConfigurationManager.AppSettings["SpecialColor3"] = colortoset;
+                Properties.Settings.Default["SpecialColor3"] = colortoset;
             }
         }
 
@@ -72,35 +72,35 @@ namespace TerminalPilot.Classes
         }
         public static void SetShell(string shell, string shellargument)
         {
-            ConfigurationManager.AppSettings["Shell"] = shell;
-            ConfigurationManager.AppSettings["ShellArgument"] = shellargument;
+            Properties.Settings.Default["Shell"] = shell;
+            Properties.Settings.Default["ShellArgument"] = shellargument;
 
         }
         public static string GetShell()
         {
-            return ConfigurationManager.AppSettings["Shell"];
+            return (string)Properties.Settings.Default["Shell"];
         }
         public static string GetAny(string key)
         {
-            return ConfigurationManager.AppSettings[key];
+            return (string)Properties.Settings.Default[key];
         }
         public static void SetAny(string key, string value)
         {
-            ConfigurationManager.AppSettings[key] = value;
+            Properties.Settings.Default[key] = value;
         }
         public static string GetShellArgument()
         {
-            return ConfigurationManager.AppSettings["ShellArgument"];
+            return (string)Properties.Settings.Default["ShellArgument"];
         }
         //set the user token
         public static void SetUserToken(string usertoken)
         {
-            ConfigurationManager.AppSettings["UserToken"] = usertoken;
+            Properties.Settings.Default["UserToken"] = usertoken;
         }
         //get the user token
         public static string GetUserToken()
         {
-            return ConfigurationManager.AppSettings["UserToken"];
+            return (string)Properties.Settings.Default["UserToken"];
         }
     }
 }
