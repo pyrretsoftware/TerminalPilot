@@ -21,6 +21,7 @@ namespace TerminalPilot.Classes
         {
             Properties.Settings.Default["Shell"] = shell;
             Properties.Settings.Default["ShellArgument"] = shellargument;
+            Properties.Settings.Defualt.Save();
 
         }
         public static string GetShell()
@@ -34,6 +35,7 @@ namespace TerminalPilot.Classes
         public static void SetAny(string key, string value)
         {
             Properties.Settings.Default[key] = value;
+            Properties.Settings.Defualt.Save();
         }
         public static string GetShellArgument()
         {
@@ -43,6 +45,7 @@ namespace TerminalPilot.Classes
         public static void SetUserToken(string usertoken)
         {
             Properties.Settings.Default["UserToken"] = usertoken;
+            Properties.Settings.Defualt.Save();
         }
         //get the user token
         public static string GetUserToken()
