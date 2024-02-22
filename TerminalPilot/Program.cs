@@ -37,7 +37,7 @@ namespace TerminalPilot
             instance.alive = true;
             instance.name = "Terminal";
             Console.WriteLine("TerminalPilot".Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Large)) + ", Version " + Assembly.GetExecutingAssembly().GetName().Version);
-            Console.WriteLine("From pyrret, Under MIT License.");
+            Console.WriteLine("From pyrret.");
             Console.WriteLine();
             Console.WriteLine("Current Shell: " + instance.Shell.Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Small1)) + ". You can change it with " +  "'pilot shell'".Pastel(Palletes.GetCurrentPallete(Enums.PalleteType.Small1)));
             Parser.Parser parser = new Parser.Parser();
