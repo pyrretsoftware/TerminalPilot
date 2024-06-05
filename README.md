@@ -1,5 +1,7 @@
 # TerminalPilot
 An open source feature-rich terminal
+
+Development has been paused as of 5/6 2024
 ## Platform support
 TerminalPilot is available on Linux and Windows. There are builds for macos, but i havent tested them because i dont have a mac.
 ## Installing
